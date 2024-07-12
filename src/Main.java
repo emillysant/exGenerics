@@ -1,3 +1,9 @@
+import Desafio.AnalisadorDados;
+import Desafio.Cliente;
+
+import java.io.IOException;
+import java.util.List;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
@@ -47,6 +53,24 @@ public class Main {
         repoAjudantes.adicionarPersonagem(robin);
 
 //        Desafio
+//        A função analisador de dados funciona tanto para csv com arquivos txt
+
+        String arquivo = "src/Desafio/dados.csv";
+        String separador = ",";
+
+        AnalisadorDados<Cliente> analisadorPessoa = new AnalisadorDados<>(separador, partes -> {
+            String nome = partes[0].trim();
+            String cpf = partes[0].trim();
+            return new Cliente(nome, cpf);
+        });
+
+        try {
+            List<Cliente> clientes = analisadorPessoa.parseDados(arquivo);
+            System.out.println("clientes:");
+            clientes.forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
 
